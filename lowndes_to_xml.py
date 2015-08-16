@@ -50,7 +50,7 @@ def createxml(lowndes_data):
 
 def savexml(tree, fileName):
     outFile = open(fileName, 'w')
-    tree.write(outFile, xml_declaration=True, encoding='UTF-8')
+    tree.write(outFile, xml_declaration=True, encoding='UTF-8', pretty_print=True)
 
 
 def getname(lowndes_data):
