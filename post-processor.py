@@ -1,12 +1,10 @@
-import sys
-import lxml
 import lowndes
 
-from io import StringIO, BytesIO
 
 def loadlowndesfile(filename):
     lowndes_data = lowndes.read(filename)
-    return  lowndes_data
+    return lowndes_data
+
 
 def createxml(lowndes_data):
     from lxml import etree
@@ -43,13 +41,17 @@ def createxml(lowndes_data):
     tree = etree.ElementTree(transcription)
     xmlschema_doc = etree.parse("http://drichards2.github.io/toast-visualiser/xsd/enhanced-strike-definition.xsd")
     schema = etree.XMLSchema(xmlschema_doc)
-    schema.validate(tree)
+    is_valid = schema.validate(tree)
+    if not(is_valid):
+        print "XML invalid"
 
     return tree
+
 
 def savexml(tree):
     outFile = open('output.xml', 'w')
     tree.write(outFile, xml_declaration=True, encoding='UTF-8')
+
 
 def getname(lowndes_data):
     return str.split(lowndes_data["info"]["creator"], " ")[0]
