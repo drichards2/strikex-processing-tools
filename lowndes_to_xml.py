@@ -61,5 +61,5 @@ if __name__ == '__main__':
     data = loadlowndesfile(stringName)
     tree = createxml(data)
 
-    outputFileName = 'output.xml'
+    outputFileName = 'exampleData_a.xml'
     savexml(tree, outputFileName)
