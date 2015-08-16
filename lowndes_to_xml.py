@@ -48,8 +48,8 @@ def createxml(lowndes_data):
     return tree
 
 
-def savexml(tree):
-    outFile = open('output.xml', 'w')
+def savexml(tree, fileName):
+    outFile = open(fileName, 'w')
     tree.write(outFile, xml_declaration=True, encoding='UTF-8')
 
 
@@ -60,4 +60,6 @@ if __name__ == '__main__':
     stringName = 'exampleData_a.txt'
     data = loadlowndesfile(stringName)
     tree = createxml(data)
-    savexml(tree)
+
+    outputFileName = 'output.xml'
+    savexml(tree, outputFileName)
