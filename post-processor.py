@@ -17,7 +17,7 @@ def createxml(lowndes_data):
     transcription.set(location_attribute, 'http://drichards2.github.io/toast-visualiser/xsd/enhanced-strike-definition.xsd')
 
     dataSources = etree.SubElement(transcription, "dataSources")
-    datasource = etree.SubElement(dataSources, "datasource")
+    datasource = etree.SubElement(dataSources, "dataSource")
     name = etree.SubElement(datasource, "name")
     name.text = getname(lowndes_data)
 
