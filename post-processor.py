@@ -1,16 +1,15 @@
-import sys
-import lxml
 import lowndes
+from lxml import etree
 
 from io import StringIO, BytesIO
+
 
 def loadlowndesfile(filename):
     lowndes_data = lowndes.read(filename)
     return  lowndes_data
 
-def createxml(lowndes_data):
-    from lxml import etree
 
+def createxml(lowndes_data):
     transcription = etree.Element("transcription")
     NS = 'http://www.w3.org/2001/XMLSchema-instance'
     location_attribute = '{%s}schemaLocation' % NS
@@ -47,15 +46,18 @@ def createxml(lowndes_data):
 
     return tree
 
-def savexml(tree):
-    outFile = open('output.xml', 'w')
-    tree.write(outFile, xml_declaration=True, encoding='UTF-8')
+
+def savexml(tree, target_file):
+    with open(target_file, 'w') as ostrm:
+        ostrm.write( etree.tostring(tree, pretty_print=True) )
+
 
 def getname(lowndes_data):
     return str.split(lowndes_data["info"]["creator"], " ")[0]
+
 
 if __name__ == '__main__':
     stringName = 'exampleData_a.txt'
     data = loadlowndesfile(stringName)
     tree = createxml(data)
-    savexml(tree)
+    savexml(tree, 'output.xml')
