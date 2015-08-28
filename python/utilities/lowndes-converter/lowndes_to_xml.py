@@ -1,4 +1,4 @@
-import lowndes
+from lowndes import lowndes
 from lxml import etree
 
 
@@ -7,7 +7,7 @@ def loadlowndesfile(filename):
     return lowndes_data
 
 
-def createxml(lowndes_data):
+def createxml(lowndes_data, validate=True):
     transcription = etree.Element("transcription")
     NS = 'http://www.w3.org/2001/XMLSchema-instance'
     location_attribute = '{%s}schemaLocation' % NS
@@ -38,11 +38,13 @@ def createxml(lowndes_data):
         original.text = str(panda_frame['time'])
 
     tree = etree.ElementTree(transcription)
-    xmlschema_doc = etree.parse("http://drichards2.github.io/toast-visualiser/xsd/enhanced-strike-definition.xsd")
-    schema = etree.XMLSchema(xmlschema_doc)
-    is_valid = schema.validate(tree)
-    if not(is_valid):
-        print "XML invalid"
+	
+    if validate:
+        print "Starting validation"
+        xmlschema_doc = etree.parse("http://drichards2.github.io/toast-visualiser/xsd/enhanced-strike-definition.xsd")
+        schema = etree.XMLSchema(xmlschema_doc)
+        is_valid = schema.validate(tree)
+        print "XML valid: {0}".format( is_valid )
 
     return tree
 
