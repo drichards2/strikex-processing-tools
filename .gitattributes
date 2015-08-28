@@ -1,0 +1,3 @@
+# Set text processing style just in case the client has core.autocrlf set strangely
+* text=auto
+
