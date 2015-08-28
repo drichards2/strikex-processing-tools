@@ -1,0 +1,3 @@
+[submodule "python/externals/lowndes-processing-tools"]
+	path = python/externals/lowndes-processing-tools
+	url = ../lowndes-processing-tools.git
