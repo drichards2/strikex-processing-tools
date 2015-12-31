@@ -15,7 +15,9 @@ def addfakeoutput(tree):
         if float(strike.find("original").text) > 61670:
             modelOutput = etree.SubElement(strike, "modelOutput", source="RodModel2")
             time = etree.SubElement(modelOutput, "time")
-            time.text = str(float(strike.find("original").text)*(1 + 0.05*(-0.5+random.random())))
+            
+            time_strike_model = float(strike.find("original").text) + 0.05 * (2 * random.random() - 1)
+            time.text = str(time_strike_model)
             print etree.tostring(strike, pretty_print=True)
         else:
             strike.find('..').remove(strike)
