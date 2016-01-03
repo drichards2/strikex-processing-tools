@@ -58,7 +58,14 @@ for runstrikes = 1:length(strikes)
     if mod(runstrikes, numBells) == 1
         if autodelimitRows
             rowDelimiter = documentNode.createElement('rowDelimiter');
-            rowDelimiter.setAttribute('source', idealSourceName);
+            
+            strike_modelout = documentNode.createElement('modelOutput');
+            strike_modelout.setAttribute('source', idealSourceName);
+            strike_modelout_time = documentNode.createElement('time');
+            strike_modelout_time.appendChild(documentNode.createTextNode(sprintf('%.3f', strikes(runstrikes).ideal_time)));
+            
+            rowDelimiter.appendChild(strike_modelout);
+            
             strikedata.appendChild(rowDelimiter);
         end
     end
